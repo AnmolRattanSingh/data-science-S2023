@@ -157,7 +157,7 @@ df_prop %>%
 
 -   All 1st and 2nd class children survived but a significant number of 3rd class ones did not.
 -   If you saw something *fishy* in q4 above, use your new plot to explain the fishy-ness.
-    -   The fishy-ness in q4 was due to not separating by Age since 100% of 1st and 2nd class children survived and that was being added up in q4.
+    -   The fishy-ness in q4 was due to not separating by Age. The plot was showing the maximum out of the 2 different proportion values for 1st class adults and children. It can now be clearly seen in the 2 different sub-plots.
 
 # Notes
 
