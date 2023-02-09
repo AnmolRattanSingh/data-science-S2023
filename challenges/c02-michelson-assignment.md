@@ -40,7 +40,7 @@ Michelson Speed-of-light Measurements
       of <code>VelocityVacuum</code> against these other factors. Are there
       other patterns in the data that might help explain the difference
       between Michelson’s estimate and <code>LIGHTSPEED_VACUUM</code>?</a>
-  - <a href="#bibliography" id="toc-bibliography">Bibliography</a>
+  - <a href="#-bibliography" id="toc--bibliography">. Bibliography</a>
 
 *Purpose*: When studying physical problems, there is an important
 distinction between *error* and *uncertainty*. The primary purpose of
@@ -329,8 +329,9 @@ df_q2 %>%
 ![](c02-michelson-assignment_files/figure-gfm/q4-cf-real-simulated-1.png)<!-- -->
 
 **Observations**: Similarities - Both the lines have a similar shape but
-differ at some peaks. Differences - Real data has more outlier points
-than the simulated data.
+differ at some peaks. Differences - The line graph for Real data moves
+out of the error bounds more times than the line graph for the Simulated
+data.
 
 ### **q5** You have access to a few other variables. Construct a few visualizations of `VelocityVacuum` against these other factors. Are there other patterns in the data that might help explain the difference between Michelson’s estimate and `LIGHTSPEED_VACUUM`?
 
@@ -366,11 +367,14 @@ df_q2 %>%
   70˚F.
 - Most of Michelson’s measurements were higher than `VELOCITY_VACUUM`
   which matches with our calculations before.
-- VelocityVacuum has a weak positive correlation with temperature.
+- VelocityVacuum has a weak positive correlation with temperature,
+  however it un-clear to spot it visually.
 - VelocityVacuum has similar standard deviation for all 3 types of image
   qualities.
+- No, there are no patterns in the data that help explain the difference
+  between Michelson’s estimate and `LIGHTSPEED_VACUUM`?
 
-## Bibliography
+## . Bibliography
 
 - \[1\] Michelson, [Experimental Determination of the Velocity of
   Light](https://play.google.com/books/reader?id=343nAAAAMAAJ&hl=en&pg=GBS.PA115)
