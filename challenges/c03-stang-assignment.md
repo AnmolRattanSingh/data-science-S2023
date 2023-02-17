@@ -369,7 +369,7 @@ df_stang_long %>%
     follow the criteria for intensive material properties which do not
     change with amount of material.
   - I feel like we do not have enough data to draw any conclusions from
-    this evidence.
+    this evidence. We will need more data points from a wider variety of materials to draw any conclusions on the general statement that elasticity is an   intensive material property.
 
 # References
 
