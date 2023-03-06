@@ -1,7 +1,7 @@
 Gapminder
 ================
-(Your name here)
-2020-
+Anmol Rattan Singh Sandhu
+2023-02-26
 
 - <a href="#grading-rubric" id="toc-grading-rubric">Grading Rubric</a>
   - <a href="#individual" id="toc-individual">Individual</a>
@@ -209,7 +209,8 @@ can.
 gapminder %>% 
   filter(year == year_min) %>% 
   ggplot(aes(x = continent, y = gdpPercap)) +
-  geom_boxplot()
+  geom_boxplot() +
+  scale_y_log10()
 ```
 
 ![](c04-gapminder-assignment_files/figure-gfm/q2-task-1.png)<!-- -->
@@ -308,6 +309,7 @@ gapminder %>%
     mapping = aes(color = country),
     size = 2
   ) +
+  scale_y_log10() +
   facet_wrap(~year)
 ```
 
@@ -376,7 +378,7 @@ gapminder %>%
 ``` r
 best_lifeExp %>% 
   ggplot(aes(x = year, y = lifeExp)) +
-  geom_line(aes(color = country))
+  geom_point(aes(color = country))
 ```
 
 ![](c04-gapminder-assignment_files/figure-gfm/q5-task2-1.png)<!-- -->
@@ -391,7 +393,7 @@ best_lifeExp %>%
 ``` r
 best_lifeExp %>%
   ggplot(aes(x = year, y = lifeExp)) +
-  geom_line(aes(color = country)) + 
+  geom_point(aes(color = country)) + 
   geom_point(
     data = . %>% filter(year == year_min),
     aes(size = gdpPercap)
