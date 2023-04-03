@@ -368,7 +368,9 @@ df_q2 %>%
 - Most of Michelson’s measurements were higher than `VELOCITY_VACUUM`
   which matches with our calculations before.
 - VelocityVacuum has a weak positive correlation with temperature,
-  however it un-clear to spot it visually.
+  however it’s un-clear to spot it visually. This suggests that the
+  correlation can be untrustworthy even though we have a positive
+  computed correlation.
 - VelocityVacuum has similar standard deviation for all 3 types of image
   qualities.
 - No, there are no patterns in the data that help explain the difference
