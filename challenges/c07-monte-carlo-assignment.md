@@ -192,24 +192,32 @@ set will estimate the probability of points landing in that area (see
 
 ``` r
 ## TASK: Choose a sample size and generate samples
+set.seed(1233)
 n <- 100000 # Choose a sample size
 df_q1 <- tibble(
   x = runif(n, 0, 1),
   y = runif(n, 0,)
-) # Generate the data
-
-df_q1$stat <- ifelse(df_q1$x^2 + df_q1$y^2 <= 1, 1, 0) # 1 if in unit circle, 0 otherwise
+) %>% 
+  mutate(
+    stat = 4*(x^2 + y^2 <= 1) # 1 if in unit circle, 0 otherwise
+  )
 ```
 
 ### **q2** Using your data in `df_q1`, estimate $\pi$.
 
 ``` r
 ## TASK: Estimate pi using your data from q1
-pi_est <- 4 * mean(df_q1$stat)
+pi_est <- df_q1 %>% 
+  summarize(
+    mean(stat)
+  )
 pi_est
 ```
 
-    ## [1] 3.14484
+    ## # A tibble: 1 × 1
+    ##   `mean(stat)`
+    ##          <dbl>
+    ## 1         3.14
 
 # Quantifying Uncertainty
 
@@ -223,14 +231,25 @@ to assess your $\pi$ estimate.
 ### **q3** Using a CLT approximation, produce a confidence interval for your estimate of $\pi$. Make sure you specify your confidence level. Does your interval include the true value of $\pi$? Was your chosen sample size sufficiently large so as to produce a trustworthy answer?
 
 ``` r
-se <- sd(df_q1$stat) / sqrt(n)
+se <- df_q1 %>% 
+  summarize(
+    sd(stat) / sqrt(n)
+  )
 z <- qnorm(1-0.05/2)
 lower <- pi_est - z * se # calculate the lower bound of the confidence interval
 upper <- pi_est + z * se # calculate the upper bound of the confidence interval
-cat("The 95% confidence interval for the estimate of pi is [", lower, ",", upper, "].\n")
+lower
 ```
 
-    ## The 95% confidence interval for the estimate of pi is [ 3.142299 , 3.147381 ].
+    ##   mean(stat)
+    ## 1   3.131663
+
+``` r
+upper
+```
+
+    ##   mean(stat)
+    ## 1   3.152017
 
 **Observations**:
 

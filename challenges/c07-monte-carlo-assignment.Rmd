@@ -24,7 +24,7 @@ Unlike exercises, **challenges will be graded**. The following rubrics define ho
 <!-- ------------------------- -->
 
 | Category    | Needs Improvement                                                                                                | Satisfactory                                                                                                               |
-|-------------------|-----------------------------|-------------------------|
+|--------------|----------------------------|-------------------------------|
 | Effort      | Some task **q**'s left unattempted                                                                               | All task **q**'s attempted                                                                                                 |
 | Observed    | Did not document observations, or observations incorrect                                                         | Documented correct observations based on analysis                                                                          |
 | Supported   | Some observations not clearly supported by analysis                                                              | All observations clearly supported by analysis (table, graph, etc.)                                                        |
@@ -108,20 +108,25 @@ Remember in `e-stat02-probability` we learned how to estimate probabilities as t
 
 ```{r q1-task}
 ## TASK: Choose a sample size and generate samples
+set.seed(1233)
 n <- 100000 # Choose a sample size
 df_q1 <- tibble(
   x = runif(n, 0, 1),
   y = runif(n, 0,)
-) # Generate the data
-
-df_q1$stat <- ifelse(df_q1$x^2 + df_q1$y^2 <= 1, 1, 0) # 1 if in unit circle, 0 otherwise
+) %>% 
+  mutate(
+    stat = 4*(x^2 + y^2 <= 1) # 1 if in unit circle, 0 otherwise
+  )
 ```
 
 ### **q2** Using your data in `df_q1`, estimate $\pi$.
 
 ```{r q2-task}
 ## TASK: Estimate pi using your data from q1
-pi_est <- 4 * mean(df_q1$stat)
+pi_est <- df_q1 %>% 
+  summarize(
+    mean(stat)
+  )
 pi_est
 ```
 
@@ -134,11 +139,15 @@ You now have an estimate of $\pi$, but how trustworthy is that estimate? In `e-s
 ### **q3** Using a CLT approximation, produce a confidence interval for your estimate of $\pi$. Make sure you specify your confidence level. Does your interval include the true value of $\pi$? Was your chosen sample size sufficiently large so as to produce a trustworthy answer?
 
 ```{r q3-task}
-se <- sd(df_q1$stat) / sqrt(n)
+se <- df_q1 %>% 
+  summarize(
+    sd(stat) / sqrt(n)
+  )
 z <- qnorm(1-0.05/2)
 lower <- pi_est - z * se # calculate the lower bound of the confidence interval
 upper <- pi_est + z * se # calculate the upper bound of the confidence interval
-cat("The 95% confidence interval for the estimate of pi is [", lower, ",", upper, "].\n")
+lower
+upper
 ```
 
 **Observations**:
