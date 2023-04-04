@@ -126,7 +126,8 @@ gapminder %>%
 
 -   I tried using a scatter plot at first but the data was too dense near the bottom and it was hard to make sense of it.
 -   I noticed a few outliers in the scatter plot and decided to use a box plot to visualize them.
--   This was the best approach I was able to find but it is still not the best since the outliers make it difficult to analyze the lower GDP values in a continent.
+-   This was a good approach but it still was not the best since the outliers made it difficult to analyze the lower GDP values in a continent.
+-   The final thing I did to make the plot more readable was adding a log scale on the y-axis.
 
 ### **q3** You should have found *at least* three outliers in q2 (but possibly many more!). Identify those outliers (figure out which countries they are).
 
