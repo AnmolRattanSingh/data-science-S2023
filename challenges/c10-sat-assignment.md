@@ -1,6 +1,6 @@
 SAT and College Grades
 ================
-(Your name here)
+Anmol Rattan Singh Sandhu
 2020-
 
 - <a href="#grading-rubric" id="toc-grading-rubric">Grading Rubric</a>
@@ -256,7 +256,8 @@ df_composite %>%
 - What relationship do `univ_GPA` and `both_SAT` exhibit?
   - They show a positive correlation.
 - What relationship do `univ_GPA` and `high_GPA` exhibit?
-  - They also show a positive correlation.
+  - They also show a positive correlation but it is a stronger
+    correlation compared to `both_SAT`.
 
 ### Hypothesis Testing with a Correlation Coefficient
 
@@ -359,8 +360,8 @@ cor.test(pull(df_composite, both_SAT), pull(df_composite, univ_GPA))
 - Based on these results, what can we say about the predictive
   capabilities of both `high_GPA` and `both_SAT` to predict `univ_GPA`?
   - `high_GPA` does have a stronger correlation than `both_SAT` so it’s
-    the better one between the two. But, it’s hard to say if either of
-    them are good to use for predicting `univ_GPA`.
+    the better one between the two. Both of them do have a significant
+    correlation with `univ_GPA` so they do offer some predictive value.
 
 Finally, let’s use the bootstrap to perform the same test using
 *different* assumptions.
@@ -405,7 +406,7 @@ tibble(
     ## # A tibble: 1 × 3
     ##   lower_ci estimate upper_ci
     ##      <dbl>    <dbl>    <dbl>
-    ## 1    0.697    0.785    0.847
+    ## 1    0.695    0.781    0.847
 
 **Observations**:
 
@@ -501,9 +502,9 @@ fit_basic %>%
     This is significantly different from zero since the interval is
     above zero.
 - By itself, how well does `both_SAT` predict `univ_GPA`?
-  - It has a noticeable positive correlation but it’s probably not that
-    good by itself to predict anything. `high_GPA` has a higher
-    correlation with `univ_GPA` and might be better for prediction.
+  - It has a noticeable positive correlation therefore it does offer
+    some predictive value. `high_GPA` has a higher correlation with
+    `univ_GPA` and might offer even better for predictive value.
 
 Remember from `e-model03-interp-warnings` that there are challenges with
 interpreting regression coefficients! Let’s investigate that idea
@@ -586,7 +587,7 @@ Before closing, let’s synthesize a bit from the analyses above.
   pieces of evidence do you have in favor of `both_SAT` being effective?
   What specific pieces of evidence do you have against?
   - `both_SAT` does have a positive correlation with `univ_GPA` but the
-    analysis suggests that it’s not an effective predictor of
+    analysis suggests that `high_GPA` is a better predictor of
     `univ_GPA`. The main evidence against that is the higher positive
     correlation `high_GPA` has with `univ_GPA`.
 
