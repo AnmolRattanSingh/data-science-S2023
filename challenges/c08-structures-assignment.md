@@ -210,11 +210,13 @@ summary(df_samples)
   - The mean of the strength of the material is around 40,000 psi.
 - To what extent can you tell what shape the distribution of the data
   has?
-  - It looks roughly like a normal distribution.
+  - There is not enough data to comment on the shape of the
+    distribution.
 - Assuming the scopus is the strength of an individual part made from
   this aluminum alloy, is the observed variability real or induced?
-  - The observed variability is both real and induced. Which can occur
-    for variation and the material and from human error.
+  - The observed variability is both real and induced. The real
+    variability is between different parts and the induced variability
+    is from the samples taken from each part.
 
 # Assessing Structural Safety
 
@@ -287,7 +289,7 @@ df_samples %>%
 **Observations**:
 
 - Does this estimate satisfy `POF < 0.03`?
-  - Yes, the POF is 0.
+  - Yes, the estimated POF is 0.
 - Is this estimate of the probability of failure trustworthy? Why or why
   not?
   - This is not trustworthy since it considers only 25 samples and also
@@ -417,9 +419,11 @@ df_norm_pof
   - Increasing the sample size of simulated points would tighten the
     confidence interval.
 - Can you *confidently* conclude that `POF < 0.03`? Why or why not?
-  - One can confidently conclude that POF \< 0.03 based on the
-    confidence interval but I would need to learn more details about the
-    tests to *confidently* conclude anything.
+  - One can somewhat conclude that POF \< 0.03 based on the confidence
+    interval but I would need to learn more details about the tests to
+    *confidently* conclude anything. There is unaccounted uncertainty
+    arsing from the limited physical tests which does not allow us to
+    make confident conclusions.
 
 ## A different way to compute the POF
 
@@ -543,7 +547,9 @@ df_samples %>%
   - Yes it does by resampling a 1000 times.
 - Does the confidence interval above account for uncertainty arising
   from *limited physical tests* (`df_samples`)? Why or why not?
-  - No, since we still have the same number of limited physical tests
-    which it will depends on.
+  - Yes, Bootstrapping does not directly account for limited physical
+    tests. However, it can be used to estimate the uncertainty
+    associated with a limited set of observations, which can help in
+    making decisions about further testing.
 - Can you confidently conclude that `POF < 0.03`? Why or why not?
   - No since the upper bound of the interval is greater than `0.03`.
