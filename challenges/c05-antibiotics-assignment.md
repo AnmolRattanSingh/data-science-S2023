@@ -153,16 +153,22 @@ In this visual you must show *all three* effectiveness values for *all
 positive or negative.
 
 ``` r
-df_antibiotics %>% 
+df_antibiotics_long <- df_antibiotics %>% 
   pivot_longer(
     names_to = "antibiotic",
     values_to = "MIC",
     cols = ends_with("in")
-  ) %>% 
-  ggplot(aes(x = MIC, y = bacteria, fill = gram)) + 
-  geom_col(position = "stack") +
-  scale_x_log10() +
-  facet_wrap(~antibiotic) +
+  ) 
+
+df_antibiotics_long %>% 
+  ggplot(aes(bacteria, MIC)) +
+  geom_point(
+    mapping = aes(shape = antibiotic, color = gram),
+    size = 3,
+    position = position_dodge(width = 0.5)
+  ) +
+  scale_y_log10() +
+  coord_flip() + 
   theme_minimal()
 ```
 
@@ -178,12 +184,7 @@ Note that your visual must be *qualitatively different* from *all* of
 your other visuals.
 
 ``` r
-df_antibiotics %>% 
-  pivot_longer(
-    names_to = "antibiotic",
-    values_to = "MIC",
-    cols = ends_with("in")
-  ) %>% 
+df_antibiotics_long %>% 
   ggplot(aes(x = antibiotic, y = MIC)) +
   geom_boxplot() +
   geom_point(aes(color = gram)) +
@@ -203,15 +204,15 @@ Note that your visual must be *qualitatively different* from *all* of
 your other visuals.
 
 ``` r
-df_antibiotics %>% 
-  pivot_longer(
-    names_to = "antibiotic",
-    values_to = "MIC",
-    cols = ends_with("in")
-  ) %>% 
-  ggplot(aes(x = antibiotic, y = bacteria, fill = gram)) + 
-  geom_tile(color = "black") +
-  scale_fill_manual(values = c("gray90", "steelblue")) +
+df_antibiotics_long %>% 
+  ggplot(aes(x = antibiotic, y = bacteria)) + 
+  geom_tile(
+    mapping = aes(fill = MIC)
+  ) + 
+  geom_text(aes(label = gram)) +
+  scale_fill_gradient(
+    trans = "log10"
+  ) +
   theme_minimal()
 ```
 
@@ -227,17 +228,14 @@ Note that your visual must be *qualitatively different* from *all* of
 your other visuals.
 
 ``` r
-df_antibiotics %>% 
-  pivot_longer(
-    names_to = "antibiotic",
-    values_to = "MIC",
-    cols = ends_with("in")
-  ) %>% 
-  ggplot(aes(x = antibiotic, y = MIC)) +
-  geom_violin() +
-  geom_point(aes(color = gram)) +
-  scale_y_log10() +
-  theme_minimal()
+df_antibiotics_long%>% 
+  ggplot( aes(x = antibiotic, y = MIC, color = antibiotic)) + 
+  geom_point() +
+  facet_wrap(~bacteria, scales = "free_y") +
+  labs(title = "Effectiveness of Antibiotics for Different Bacteria",
+       x = "Antibiotic",
+       y = "MIC") + 
+  scale_y_log10()
 ```
 
 ![](c05-antibiotics-assignment_files/figure-gfm/q1.4-1.png)<!-- -->
@@ -253,17 +251,11 @@ your other visuals.
 
 ``` r
 df_antibiotics %>% 
-  pivot_longer(
-    names_to = "antibiotic",
-    values_to = "MIC",
-    cols = ends_with("in")
-  ) %>%
-  group_by(antibiotic, gram) %>%
-  summarize(count = n(), .groups = "drop") %>%
-  ggplot(aes(x = antibiotic, y = count, fill = gram)) +
-  geom_bar(stat = "identity", position = "dodge") +
-  scale_fill_manual(values = c("blue", "red"), name = "Gram Status") +
-  theme_minimal()
+  ggplot(aes(bacteria, penicillin)) +
+  geom_bar(aes(fill = gram), stat = "identity") +
+  geom_hline(yintercept = 1) +
+  scale_y_log10() +
+  coord_flip()
 ```
 
 ![](c05-antibiotics-assignment_files/figure-gfm/q1.5-1.png)<!-- -->
